@@ -9,4 +9,11 @@ public class LifeTests
     {
         Gamestate gs = new Gamestate();
     }
+
+    [Fact]
+    public void CanAddCell()
+    {
+        Gamestate gs = new Gamestate();
+        gs.Add(0, 0);
+    }
 }

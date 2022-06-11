@@ -6,6 +6,11 @@ namespace Life64
 		public Gamestate()
 		{
 		}
+
+		public void Add(Int64 x, Int64 y)
+        {
+
+        }
 	}
 }
 
