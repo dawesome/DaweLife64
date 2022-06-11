@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1700.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Life64Tests", "Life64Tests\Life64Tests.csproj", "{BF06D379-52DD-458A-A8F6-0AB39DE5736D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Life64", "Life64\Life64.csproj", "{FE0F617F-9AC0-4778-AC0B-66F15F03231D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF06D379-52DD-458A-A8F6-0AB39DE5736D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF06D379-52DD-458A-A8F6-0AB39DE5736D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF06D379-52DD-458A-A8F6-0AB39DE5736D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF06D379-52DD-458A-A8F6-0AB39DE5736D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE0F617F-9AC0-4778-AC0B-66F15F03231D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE0F617F-9AC0-4778-AC0B-66F15F03231D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE0F617F-9AC0-4778-AC0B-66F15F03231D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE0F617F-9AC0-4778-AC0B-66F15F03231D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {682BA768-7105-4179-BBC6-B11C55A3DA45}
+	EndGlobalSection
+EndGlobal
