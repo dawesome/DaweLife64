@@ -7,7 +7,10 @@ namespace Life64
         {
             foreach (Tuple<Int64, Int64> cell in current.Game)
             {
-
+                if (current.SumNeighbors(cell) >= 3 && current.SumNeighbors(cell) <= 5)
+                {
+                    next.Set(cell);
+                }
             }
         }
 	}

@@ -19,6 +19,10 @@ namespace Life64
 			game = new HashSet<Cell>();
 		}
 
+		public void Set(Cell cell)
+        {
+			game.Add(cell);
+        }
 		public void Set(Int64 x, Int64 y)
         {
 			game.Add(Tuple.Create(x, y));
@@ -43,6 +47,11 @@ namespace Life64
 		private Int64 DecWithoutUnderflow(Int64 val)
         {
 			return (val == Int64.MinValue) ? val : val - 1;
+        }
+
+		public int SumNeighbors(Tuple<Int64, Int64> cell)
+        {
+			return SumNeighbors(cell.Item1, cell.Item2);
         }
 
 		public int SumNeighbors(Int64 x, Int64 y)

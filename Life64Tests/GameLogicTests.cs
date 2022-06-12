@@ -27,20 +27,60 @@ namespace Life64Tests
             Assert.False(next.IsAlive(0, 0));
         }
 
-        //[Fact]
-        //public void AliveCellWithThreeNeighborsLives()
-        //{
-        //    GameState gameState = new GameState();
-        //    gameState.Set(0, 0);
-        //    gameState.Set(1, 0);
-        //    gameState.Set(-1, 0);
-        //    gameState.Set(0, 1);
+        [Fact]
+        public void AliveCellWithThreeNeighborsLivesAfterTick()
+        {
+            GameState gameState = new GameState();
+            gameState.Set(0, 0);
 
-        //    GameState next = new GameState();
-        //    GameLogic.Tick(gameState, ref next);
+            // neighbors 
+            gameState.Set(1, 0);
+            gameState.Set(-1, 0);
+            gameState.Set(0, 1);
 
-        //    Assert.True(next.IsAlive(0, 0));
-        //}
+            GameState next = new GameState();
+            GameLogic.Tick(gameState, ref next);
+
+            Assert.True(next.IsAlive(0, 0));
+        }
+
+        [Fact]
+        public void AliveCellWithFourNeighborsLivesAfterTick()
+        {
+            GameState gameState = new GameState();
+            gameState.Set(0, 0);
+
+            // neighbors 
+            gameState.Set(1, 0);
+            gameState.Set(-1, 0);
+            gameState.Set(0, 1);
+            gameState.Set(1, 1);
+
+            GameState next = new GameState();
+            GameLogic.Tick(gameState, ref next);
+
+            Assert.True(next.IsAlive(0, 0));
+        }
+
+        [Fact]
+        public void AliveCellWithSixNeighborsDiesAfterTick()
+        {
+            GameState gameState = new GameState();
+            gameState.Set(0, 0);
+
+            // neighbors
+            gameState.Set(1, 0);
+            gameState.Set(-1, 0);
+            gameState.Set(0, 1);
+            gameState.Set(0, -1);
+            gameState.Set(-1, -1);
+            gameState.Set(1, 1);
+
+            GameState next = new GameState();
+            GameLogic.Tick(gameState, ref next);
+
+            Assert.False(next.IsAlive(0, 0));
+        }
     }
 }
 
