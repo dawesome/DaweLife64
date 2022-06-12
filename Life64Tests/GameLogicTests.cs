@@ -81,6 +81,22 @@ namespace Life64Tests
 
             Assert.False(next.IsAlive(0, 0));
         }
+
+        [Fact]
+        public void DeadCellWithThreeNeighborsLivesAfterTick()
+        {
+            GameState gameState = new GameState();
+            
+            // neighbors
+            gameState.Set(1, 0);
+            gameState.Set(-1, 0);
+            gameState.Set(0, 1);
+            
+            GameState next = new GameState();
+            GameLogic.Tick(gameState, ref next);
+
+            Assert.True(next.IsAlive(0, 0));
+        }
     }
 }
 

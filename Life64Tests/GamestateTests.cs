@@ -55,4 +55,14 @@ public class GamestateTests
 
         Assert.Equal(1, gamestate.SumNeighbors(x, y));
     }
+
+    [Fact]
+    public void DeadNeighborsReturnsList()
+    {
+        HashSet<Tuple<Int64, Int64>> deadCells = new HashSet<Tuple<long, long>>();
+        gamestate.GetDeadNeighbors(0, 0, ref deadCells);
+
+        Assert.Contains<Tuple<Int64, Int64>>(Tuple.Create<Int64, Int64>(0, 1), deadCells);
+        Assert.Equal(8, deadCells.Count);
+    }
 }

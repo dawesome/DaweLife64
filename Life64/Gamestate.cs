@@ -78,6 +78,35 @@ namespace Life64
             }
 			return totalAliveNeighbors;
         }
-	}
+
+		public void GetDeadNeighbors(Cell cell, ref HashSet<Cell> deadCells)
+        {
+			GetDeadNeighbors(cell.Item1, cell.Item2, ref deadCells);
+        }
+
+		public void GetDeadNeighbors(Int64 x, Int64 y, ref HashSet<Cell> deadCells)
+        {
+			Int64 maxRow = IncWithoutOverflow(x);
+			Int64 maxCol = IncWithoutOverflow(y);
+
+			Int64 minRow = DecWithoutUnderflow(x);
+			Int64 minCol = DecWithoutUnderflow(y);
+
+			for (Int64 row = minRow; row >= minRow && row <= maxRow; ++row) // minRow check takes advantage of underflow to exit the loop
+			{
+				for (Int64 col = minCol; col >= minCol && col <= maxCol; ++col) // ibid.
+				{
+					if (row == x && col == y)
+					{
+						continue;
+					}
+					else if (!IsAlive(row, col))
+                    {
+						deadCells.Add(Tuple.Create<Int64, Int64>(row, col));
+                    }
+				}
+			}
+		}
+    }
 }
 
