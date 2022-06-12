@@ -35,19 +35,29 @@ namespace Life64
 			return game.TryGetValue(Tuple.Create(x,y), out outVal);
         }
 
+		private Int64 IncWithoutOverflow(Int64 val)
+        {
+			return (val == Int64.MaxValue) ? val : val + 1;
+		}
+
+		private Int64 DecWithoutUnderflow(Int64 val)
+        {
+			return (val == Int64.MinValue) ? val : val - 1;
+        }
+
 		public int SumNeighbors(Int64 x, Int64 y)
         {
 			int totalAliveNeighbors = 0;
 
-			Int64 maxRow = (x == Int64.MaxValue) ? x : x + 1;
-			Int64 minRow = (x == Int64.MinValue) ? x : x - 1;
+			Int64 maxRow = IncWithoutOverflow(x);
+			Int64 maxCol = IncWithoutOverflow(y);
 
-			Int64 maxCol = (y == Int64.MaxValue) ? y : y + 1;
-			Int64 minCol = (y == Int64.MinValue) ? y : y - 1;
+			Int64 minRow = DecWithoutUnderflow(x);
+			Int64 minCol = DecWithoutUnderflow(y);
 
 			for (Int64 row = minRow; row >= minRow && row <= maxRow; ++row) // minRow check takes advantage of underflow to exit the loop
             {
-				for (Int64 col = minCol; col >= minCol && col <= maxCol; ++col)
+				for (Int64 col = minCol; col >= minCol && col <= maxCol; ++col) // ibid.
                 {
 					if (row == x && col == y)
                     {
