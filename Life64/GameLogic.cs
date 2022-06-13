@@ -22,7 +22,10 @@ namespace Life64
         {
             // Would be slightly better to add dead neighbors to a checklist here in SumNeighbors.
             int currentLivingNeighbors = current.SumNeighbors(cell);
-            if (currentLivingNeighbors >= 3 && currentLivingNeighbors <= 5)
+
+            // If an "alive" cell had less than 2 or more than 3 alive neighbors (in any of the 8 surrounding cells), it becomes dead.
+            //  So if it has 2 or 3 neighbors, it stays alive
+            if (currentLivingNeighbors == 2 || currentLivingNeighbors == 3)
             {
                 next.Set(cell);
             }
@@ -37,6 +40,7 @@ namespace Life64
         {
             foreach (Cell deadCell in deadCells)
             {
+                // If a "dead" cell had *exactly * 3 alive neighbors, it becomes alive.
                 if (current.SumNeighbors(deadCell) == 3)
                 {
                     next.Set(deadCell);

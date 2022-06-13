@@ -8,6 +8,9 @@ namespace Life64
         {
             // See https://aka.ms/new-console-template for more information
             Console.WriteLine("Hello, World!");
+
+            GameState gs;
+            LifeIO.ReadFromFile("/Users/dawemich/Projects/DaweLife64/Life64/test_glider.lif", out gs);
         }
     }
 }
