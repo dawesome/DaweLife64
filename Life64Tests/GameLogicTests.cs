@@ -45,7 +45,7 @@ namespace Life64Tests
         }
 
         [Fact]
-        public void AliveCellWithFourNeighborsLivesAfterTick()
+        public void AliveCellWithFourNeighborsDiesAfterTick()
         {
             GameState gameState = new GameState();
             gameState.Set(0, 0);
@@ -59,7 +59,7 @@ namespace Life64Tests
             GameState next = new GameState();
             GameLogic.Tick(gameState, ref next);
 
-            Assert.True(next.IsAlive(0, 0));
+            Assert.False(next.IsAlive(0, 0));
         }
 
         [Fact]
