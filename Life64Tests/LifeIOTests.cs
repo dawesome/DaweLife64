@@ -36,7 +36,7 @@ namespace Life64Tests
 		[Fact]
 		public void TestGliderProducesCorrectPopulation()
 		{
-			GameState glider;
+            GameState glider;
 			LifeIO.ReadFromFile("../../../../Life64/patterns/test_glider.lif", out glider);
 			Assert.Equal(5, glider.Population);
 		}

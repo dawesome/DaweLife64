@@ -14,6 +14,11 @@ namespace Life64
             set { game = value; }
         }
 
+		public GameState()
+		{
+			game = new HashSet<Cell>();
+		}
+
 		public GameState(GameState copy)
 		{
 			game = new HashSet<Cell>(copy.game);
@@ -23,11 +28,6 @@ namespace Life64
         {
 			get { return game.Count; }
         }
-
-		public GameState()
-		{
-			game = new HashSet<Cell>();
-		}
 
 		public void Set(Cell cell)
         {

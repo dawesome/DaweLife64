@@ -4,7 +4,9 @@ namespace Life64Tests
 {
 	public class GameLogicTests
 	{
-		public GameLogicTests()
+        private const string PATTERN_FOLDER = "../../../../Life64/patterns/";
+
+        public GameLogicTests()
 		{ 
 		}
 
@@ -116,7 +118,7 @@ namespace Life64Tests
         public void TestGliderTickProducesCorrectPopulation()
         {
             GameState glider;
-            LifeIO.ReadFromFile("../../../../Life64/patterns/test_glider.lif", out glider);
+            LifeIO.ReadFromFile(PATTERN_FOLDER + "test_glider.lif", out glider);
             Assert.Equal(5, glider.Population);
 
             for (var i = 0; i < 10; ++i)
@@ -131,13 +133,14 @@ namespace Life64Tests
         public void TestGliderMultiTickProducesCorrectPopulation()
         {
             GameState glider;
-            LifeIO.ReadFromFile("../../../../Life64/patterns/test_glider.lif", out glider);
+            LifeIO.ReadFromFile(PATTERN_FOLDER + "test_glider.lif", out glider);
             Assert.Equal(5, glider.Population);
 
             GameState next = new GameState();
             GameLogic.MultiTick(glider, ref next, 10);
             Assert.Equal(5, next.Population);
         }
+
 
     }
 }
