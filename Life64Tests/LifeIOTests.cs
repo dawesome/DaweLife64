@@ -33,6 +33,14 @@ namespace Life64Tests
 			}
 		}
 
+		[Fact]
+		public void TestGliderProducesCorrectPopulation()
+		{
+			GameState glider;
+			LifeIO.ReadFromFile("../../../../Life64/patterns/test_glider.lif", out glider);
+			Assert.Equal(5, glider.Population);
+		}
+
 		private static Stream GenerateStreamFromString(string str)
 		{
 			return new MemoryStream(Encoding.UTF8.GetBytes(str ?? ""));

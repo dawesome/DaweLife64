@@ -14,6 +14,16 @@ namespace Life64
             set { game = value; }
         }
 
+		public GameState(GameState copy)
+		{
+			game = new HashSet<Cell>(copy.game);
+		}
+
+		public Int64 Population
+        {
+			get { return game.Count; }
+        }
+
 		public GameState()
 		{
 			game = new HashSet<Cell>();

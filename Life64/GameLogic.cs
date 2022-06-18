@@ -14,7 +14,18 @@ namespace Life64
             {
                 SetLivingCell(current, next, cell);
                 AddDeadNeighborsToSet(current, cell, ref deadCellsToCheck);
-                SetDeadCells(current, next, in deadCellsToCheck);
+            }
+            SetDeadCells(current, next, in deadCellsToCheck);
+
+        }
+
+        public static void MultiTick(GameState current, ref GameState next, int numTicks)
+        {
+            for (int i = 0; i < numTicks; ++i)
+            {
+                next.Clear();
+                Tick(current, ref next);
+                current = new GameState(next);
             }
         }
 
