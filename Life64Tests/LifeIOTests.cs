@@ -9,16 +9,6 @@ namespace Life64Tests
 		{
 		}
 
-		private static Stream GenerateStreamFromString(string str)
-        {
-			return new MemoryStream(Encoding.UTF8.GetBytes(str ?? ""));
-        }
-
-		private static StreamReader GenerateStreamReader(string str)
-        {
-			return new StreamReader(GenerateStreamFromString(str));
-        }
-
 		[Fact]
 		public void ReadCreatesGamestate()
 		{
@@ -41,7 +31,16 @@ namespace Life64Tests
 				LifeIO.WriteGamestate(gs, new StreamWriter(memoryStream));
 				Assert.Equal("#Life 1.06\n-1 1\n", Encoding.UTF8.GetString(memoryStream.ToArray()));
 			}
+		}
 
+		private static Stream GenerateStreamFromString(string str)
+		{
+			return new MemoryStream(Encoding.UTF8.GetBytes(str ?? ""));
+		}
+
+		private static StreamReader GenerateStreamReader(string str)
+		{
+			return new StreamReader(GenerateStreamFromString(str));
 		}
 	}
 }

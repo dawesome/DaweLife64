@@ -20,6 +20,14 @@ namespace Life64
             }
         }
 
+        public static void WriteToConsole(GameState gs)
+        {
+            using (StreamWriter sw = (StreamWriter)Console.Out)
+            {
+                WriteGamestate(gs, sw);
+            }
+        }
+
         public static void WriteGamestate(GameState gs, StreamWriter sw)
         {
             sw.WriteLine("#Life 1.06");
@@ -47,6 +55,21 @@ namespace Life64
 				Console.WriteLine(e.Message);
             }
 		}
+
+        public static void ReadFromConsole(out GameState gs)
+        {
+            gs = new GameState();
+            try
+            {
+                using (StreamReader sr = (StreamReader)Console.In)
+                {
+                    ReadGamestate(gs, sr);
+                }
+            } catch (IOException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
 
         public static void ReadGamestate(GameState gs, StreamReader sr)
         {
