@@ -16,22 +16,22 @@ namespace Life64
 
 			using (StreamWriter sw = new StreamWriter(path))
             {
+                sw.WriteLine("#Life 1.06");
                 WriteGamestate(gs, sw);
             }
         }
 
         public static void WriteToConsole(GameState gs)
         {
-            using (StreamWriter sw = (StreamWriter)Console.Out)
+            using (StreamWriter sw = new StreamWriter(Console.OpenStandardOutput()))
             {
+                sw.AutoFlush = true;
                 WriteGamestate(gs, sw);
             }
         }
 
         public static void WriteGamestate(GameState gs, StreamWriter sw)
         {
-            sw.WriteLine("#Life 1.06");
-
             // TODO: Something better here? Sucks a little to have to know the type
             foreach (Tuple<Int64, Int64> cell in gs.Game)
             {
@@ -48,6 +48,7 @@ namespace Life64
             {
 				using (StreamReader sr = new StreamReader(path))
                 {
+                    string? header = sr.ReadLine();
                     ReadGamestate(gs, sr);
                 }
             } catch (IOException e)
@@ -73,18 +74,27 @@ namespace Life64
 
         public static void ReadGamestate(GameState gs, StreamReader sr)
         {
-            string? header = sr.ReadLine();
-
             while (!sr.EndOfStream)
             {
                 string? line = sr.ReadLine();
                 if (line != null)
                 {
+                    line = TransformCoordinateLineToLifeFormat(line);
                     string[] cell = line.Split();
                     gs.Set(Int64.Parse(cell[0]), Int64.Parse(cell[1]));
                 }
             }
         }
+
+        private static string TransformCoordinateLineToLifeFormat(string line)
+        {
+            line = line.Replace("(", String.Empty);
+            line = line.Replace(")", String.Empty);
+            line = line.Replace(',', ' ');
+            line = line.Replace("  ", " ");
+            return line;
+        }
     }
 }
 
+ 
