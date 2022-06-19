@@ -6,42 +6,40 @@ namespace Life64Tests
 	{
         private const string PATTERN_FOLDER = "../../../../Life64/patterns/";
 
+        GameState current;
+        GameState next;
+
         public GameLogicTests()
-		{ 
+		{
+            current = new GameState();
+            next = new GameState();
 		}
 
 		[Fact]
 		public void CanCallTick()
         {
-			GameState next = new GameState();
 			GameLogic.Tick(new GameState(), ref next);
         }
 
         [Fact]
         public void CellWithNoNeighborsDiesAfterTick()
         {
-            GameState gameState = new GameState();
-            gameState.Set(0, 0);
-
-            GameState next = new GameState();
-
-            GameLogic.Tick(gameState, ref next);
+            current.Set(0, 0);
+            GameLogic.Tick(current, ref next);
             Assert.False(next.IsAlive(0, 0));
         }
 
         [Fact]
         public void AliveCellWithThreeNeighborsLivesAfterTick()
         {
-            GameState gameState = new GameState();
-            gameState.Set(0, 0);
+            current.Set(0, 0);
 
             // neighbors 
-            gameState.Set(1, 0);
-            gameState.Set(-1, 0);
-            gameState.Set(0, 1);
+            current.Set(1, 0);
+            current.Set(-1, 0);
+            current.Set(0, 1);
 
-            GameState next = new GameState();
-            GameLogic.Tick(gameState, ref next);
+            GameLogic.Tick(current, ref next);
 
             Assert.True(next.IsAlive(0, 0));
         }
@@ -49,17 +47,15 @@ namespace Life64Tests
         [Fact]
         public void AliveCellWithFourNeighborsDiesAfterTick()
         {
-            GameState gameState = new GameState();
-            gameState.Set(0, 0);
+            current.Set(0, 0);
 
             // neighbors 
-            gameState.Set(1, 0);
-            gameState.Set(-1, 0);
-            gameState.Set(0, 1);
-            gameState.Set(1, 1);
+            current.Set(1, 0);
+            current.Set(-1, 0);
+            current.Set(0, 1);
+            current.Set(1, 1);
 
-            GameState next = new GameState();
-            GameLogic.Tick(gameState, ref next);
+            GameLogic.Tick(current, ref next);
 
             Assert.False(next.IsAlive(0, 0));
         }
@@ -67,19 +63,17 @@ namespace Life64Tests
         [Fact]
         public void AliveCellWithSixNeighborsDiesAfterTick()
         {
-            GameState gameState = new GameState();
-            gameState.Set(0, 0);
+            current.Set(0, 0);
 
             // neighbors
-            gameState.Set(1, 0);
-            gameState.Set(-1, 0);
-            gameState.Set(0, 1);
-            gameState.Set(0, -1);
-            gameState.Set(-1, -1);
-            gameState.Set(1, 1);
+            current.Set(1, 0);
+            current.Set(-1, 0);
+            current.Set(0, 1);
+            current.Set(0, -1);
+            current.Set(-1, -1);
+            current.Set(1, 1);
 
-            GameState next = new GameState();
-            GameLogic.Tick(gameState, ref next);
+            GameLogic.Tick(current, ref next);
 
             Assert.False(next.IsAlive(0, 0));
         }
@@ -87,15 +81,12 @@ namespace Life64Tests
         [Fact]
         public void DeadCellWithThreeNeighborsLivesAfterTick()
         {
-            GameState gameState = new GameState();
-            
             // neighbors
-            gameState.Set(1, 0);
-            gameState.Set(-1, 0);
-            gameState.Set(0, 1);
+            current.Set(1, 0);
+            current.Set(-1, 0);
+            current.Set(0, 1);
             
-            GameState next = new GameState();
-            GameLogic.Tick(gameState, ref next);
+            GameLogic.Tick(current, ref next);
 
             Assert.True(next.IsAlive(0, 0));
         }
@@ -103,15 +94,11 @@ namespace Life64Tests
         [Fact]
         public void CanRunMultiTick()
         {
-            GameState gameState = new GameState();
-
             // neighbors
-            gameState.Set(1, 0);
-            gameState.Set(-1, 0);
-            gameState.Set(0, 1);
-
-            GameState next = new GameState();
-            GameLogic.MultiTick(gameState, ref next, 10);
+            current.Set(1, 0);
+            current.Set(-1, 0);
+            current.Set(0, 1);
+            GameLogic.MultiTick(current, ref next, 10);
         }
 
         [Fact]
@@ -123,7 +110,6 @@ namespace Life64Tests
 
             for (var i = 0; i < 10; ++i)
             {
-                GameState next = new GameState();
                 GameLogic.Tick(glider, ref next);
                 Assert.Equal(5, next.Population);
             }
@@ -136,7 +122,6 @@ namespace Life64Tests
             LifeIO.ReadFromFile(PATTERN_FOLDER + "test_glider.lif", out glider);
             Assert.Equal(5, glider.Population);
 
-            GameState next = new GameState();
             GameLogic.MultiTick(glider, ref next, 10);
             Assert.Equal(5, next.Population);
         }
@@ -148,7 +133,6 @@ namespace Life64Tests
             LifeIO.ReadFromFile(PATTERN_FOLDER + "rabbits.lif", out rabbits);
             Assert.Equal(14, rabbits.Population);
 
-            GameState next = new GameState();
             GameLogic.MultiTick(rabbits, ref next, 10);
             Assert.Equal(22, next.Population);
         }
@@ -160,9 +144,8 @@ namespace Life64Tests
             LifeIO.ReadFromFile(PATTERN_FOLDER + "acorn.lif", out acorn);
             Assert.Equal(7, acorn.Population);
 
-            GameState next = new GameState();
             GameLogic.MultiTick(acorn, ref next, 10);
-            Assert.Equal(30, next.Population);
+            Assert.Equal(30, next.Population);  
         }
     }
 }
