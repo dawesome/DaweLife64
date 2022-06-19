@@ -141,7 +141,29 @@ namespace Life64Tests
             Assert.Equal(5, next.Population);
         }
 
+        [Fact]
+        public void TestRabbitsMultiTickProducesCorrectPopulation()
+        {
+            GameState rabbits;
+            LifeIO.ReadFromFile(PATTERN_FOLDER + "rabbits.lif", out rabbits);
+            Assert.Equal(14, rabbits.Population);
 
+            GameState next = new GameState();
+            GameLogic.MultiTick(rabbits, ref next, 10);
+            Assert.Equal(22, next.Population);
+        }
+
+        [Fact]
+        public void TestAcornMultiTickProducesCorrectPopulation()
+        {
+            GameState acorn;
+            LifeIO.ReadFromFile(PATTERN_FOLDER + "acorn.lif", out acorn);
+            Assert.Equal(7, acorn.Population);
+
+            GameState next = new GameState();
+            GameLogic.MultiTick(acorn, ref next, 10);
+            Assert.Equal(30, next.Population);
+        }
     }
 }
 
