@@ -62,7 +62,7 @@ namespace Life64
             gs = new GameState();
             try
             {
-                using (StreamReader sr = (StreamReader)Console.In)
+                using (StreamReader sr = new StreamReader(Console.OpenStandardInput()))
                 {
                     ReadGamestate(gs, sr);
                 }
@@ -77,7 +77,7 @@ namespace Life64
             while (!sr.EndOfStream)
             {
                 string? line = sr.ReadLine();
-                if (line != null)
+                if (!String.IsNullOrEmpty(line))
                 {
                     line = TransformCoordinateLineToLifeFormat(line);
                     string[] cell = line.Split();

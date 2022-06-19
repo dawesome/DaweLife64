@@ -6,11 +6,15 @@ namespace Life64
     {
         static void Main(string[] args)
         {
-            // See https://aka.ms/new-console-template for more information
-            Console.WriteLine("Hello, World!");
-
             GameState gs;
-            LifeIO.ReadFromFile("/Users/dawemich/Projects/DaweLife64/Life64/test_glider.lif", out gs);
+            GameState next = new GameState();
+
+            // Read from Console, run 10 iterations, output
+            LifeIO.ReadFromConsole(out gs);
+
+            GameLogic.MultiTick(gs, ref next, 10);
+
+            LifeIO.WriteToConsole(next);
         }
     }
 }
